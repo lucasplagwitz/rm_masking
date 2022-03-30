@@ -5,7 +5,13 @@ import numpy as np
 import nibabel as nib
 import torch
 import cv2
-from unet import UNet
+
+try:
+    from rm_masking.unet import UNet
+    package_dir = os.path.dirname(__file__)
+except ModuleNotFoundError:
+    # compatibility with direct "python predict.py ..."
+    from unet import UNet
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -23,11 +29,9 @@ def get_args():
     return parser.parse_args()
 
 
-if __name__ == '__main__':
-    args = get_args()
-    in_files = args.input
-    out_files = args.output
-    threshold = args.threshold
+def run(in_files, out_files, model=None, threshold=0.5):
+    if model is None:
+        model = os.path.join(package_dir, 'models/only_mouse.pth')
 
     if isinstance(in_files, list):
         in_files = in_files[0]
@@ -46,7 +50,7 @@ if __name__ == '__main__':
 
     device = "cpu"
     net.to(device=device)
-    net.load_state_dict(torch.load(args.model, map_location=device))
+    net.load_state_dict(torch.load(model, map_location=device))
 
     logging.info('Model loaded!')
 
@@ -99,3 +103,12 @@ if __name__ == '__main__':
         nib.save(mask_out, os.path.join(out_files, filename.split(".")[0] + "_mask"))
         nib.save(nii_out, os.path.join(out_files, filename.split(".")[0] + "_fmri"))
         logging.info(f"Successful masking of {filename}")
+
+
+if __name__ == '__main__':
+    args = get_args()
+    in_files = args.input
+    out_files = args.output
+    threshold = args.threshold
+    model = args.model
+    run(in_files, out_files, model, threshold)
