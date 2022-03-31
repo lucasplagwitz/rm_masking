@@ -11,9 +11,10 @@ The training process of the model will be added in one of the next versions.
 
 ### Installation
 
-- Activate the Python environment if available.
+- Activate the Anaconda environment if available. 
+- If git is missing: install it via ```conda install -c anaconda git```
 - Install the package with ```pip install git+https://github.com/lucasplagwitz/rm_masking.git```.
-- Start the prediction with ```python -c "from rm_masking import predict; predict.run('/path/to/input_niis/', '/path/to/output_niis/')"```
+- Start the transformation with ```python -c "from rm_masking import predict; predict.run(r'/path/to/input_niis/', r'/path/to/output_niis/')"```
 
 ### References
 [1] [O. Ronneberger, P. Fischer, T. Brox: U-Net: Convolutional Networks for Biomedical Image Segmentation. 
