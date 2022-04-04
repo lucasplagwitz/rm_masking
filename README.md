@@ -9,6 +9,14 @@ It focuses on:
 The code and net structure is inspired by a [PyTorch U-Net implementation](https://github.com/milesial/Pytorch-UNet).
 The training process of the model will be added in one of the next versions.
 
+### Demo
+
+<p>
+    <img src="./demo/input.png" width="200" title="Input" />
+    <img src="./demo/mask.png" width="200" title="U-Net mask" />
+    <img src="./demo/output.png" width="200" title="U-Net output" />
+</p>
+
 ### Installation
 
 - Activate the Anaconda environment if available. 
