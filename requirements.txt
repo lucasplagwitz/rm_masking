@@ -2,6 +2,7 @@ matplotlib
 numpy
 Pillow
 torch
+scipy
 torchvision
 tqdm
 nibabel

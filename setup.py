@@ -26,6 +26,7 @@ setup(
     keywords=['machine learning', 'u-net', 'segmentation', 'brain masking', 'mouse'],
     install_requires=[
         'matplotlib',
+        'scipy',
         'numpy',
         'Pillow',
         'torch',

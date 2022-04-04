@@ -3,6 +3,7 @@ import logging
 import os
 import numpy as np
 import nibabel as nib
+import scipy.ndimage
 import torch
 import cv2
 
@@ -89,6 +90,7 @@ def run(in_files, out_files, model=None, threshold=0.5):
                               dsize=original_size2, interpolation=cv2.INTER_CUBIC)
             mask = mask[:original_size1[0], :original_size1[1]]
             mask = (mask > threshold).astype(int)
+            mask = scipy.ndimage.binary_fill_holes(mask)
             img *= 255  # scaling has to be removed for future models
 
             # apply mask to image
