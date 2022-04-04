@@ -11,11 +11,9 @@ The training process of the model will be added in one of the next versions.
 
 ### Demo
 
-<p>
-    <img src="./demo/input.png" width="200" title="Input" />
-    <img src="./demo/mask.png" width="200" title="U-Net mask" />
-    <img src="./demo/output.png" width="200" title="U-Net output" />
-</p>
+| Input | U-Net mask | U-Net Output |
+|-------|------------|--------------|
+| <img src="./demo/input.png"/>| <img src="./demo/mask.png"/> |   <img src="./demo/output.png"/>
 
 ### Installation
 
