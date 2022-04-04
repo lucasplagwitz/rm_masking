@@ -90,7 +90,7 @@ def run(in_files, out_files, model=None, threshold=0.5):
                               dsize=original_size2, interpolation=cv2.INTER_CUBIC)
             mask = mask[:original_size1[0], :original_size1[1]]
             mask = (mask > threshold).astype(int)
-            mask = scipy.ndimage.binary_fill_holes(mask)
+            mask = scipy.ndimage.binary_fill_holes(mask).astype(int)
             img *= 255  # scaling has to be removed for future models
 
             # apply mask to image
