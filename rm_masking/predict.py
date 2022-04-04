@@ -87,7 +87,7 @@ def run(in_files, out_files, model=None, threshold=0.5):
             # scale up to original source
             mask_scaled = np.argmax(mask_scaled[0, :], axis=0)
             mask = cv2.resize(mask_scaled.astype('float32'),
-                              dsize=original_size2, interpolation=cv2.INTER_CUBIC)
+                              dsize=original_size2, interpolation=cv2.INTER_NEAREST)
             mask = mask[:original_size1[0], :original_size1[1]]
             mask = (mask > threshold).astype(int)
             mask = scipy.ndimage.binary_fill_holes(mask).astype(int)
