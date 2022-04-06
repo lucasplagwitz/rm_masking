@@ -19,7 +19,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 def get_args():
     parser = argparse.ArgumentParser(description='Predict masks from input images')
-    parser.add_argument('--model', '-m', default='./models/only_mouse.pth', metavar='FILE',
+    parser.add_argument('--model', '-m', default='./models/only_mouse_old.pth', metavar='FILE',
                         help='Specify the file in which the model is stored')
     parser.add_argument('--input', '-i', metavar='INPUT', nargs='+', help='Folder of input images',
                         default="/path/to/nifti_input")
@@ -32,7 +32,7 @@ def get_args():
 
 def run(in_files, out_files, model=None, threshold=0.5):
     if model is None:
-        model = os.path.join(package_dir, 'models/only_mouse.pth')
+        model = os.path.join(package_dir, 'models/only_mouse_old.pth')
 
     if isinstance(in_files, list):
         in_files = in_files[0]
