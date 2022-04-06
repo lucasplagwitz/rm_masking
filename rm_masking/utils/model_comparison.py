@@ -14,6 +14,9 @@ from rm_masking.utils.data_loading import BasicDataset
 from rm_masking.unet import UNet
 
 
+def dice_score(mask, gt):
+    return np.sum(mask[gt == 1])*2 / (np.sum(mask) + np.sum(gt))
+
 model_path = "../models/"
 
 mouse_test_img_path = "../../data/png/mouse_test/img/"
@@ -59,9 +62,10 @@ for i, model in enumerate(models):
         #plt.imshow(np.abs(c))
         #plt.show()
 
-        sum += ((np.sum(np.abs(a-c)))/np.prod(np.shape(a)))
-    print(1 - (sum/len(dataset_test.ids)))
-    all_sum_mouse.append(1 - (sum/len(dataset_test.ids)))
+        sum += dice_score(gt=c, mask=a) # ((np.sum(np.abs(a-c)))/np.prod(np.shape(a)))
+
+    print((sum/len(dataset_test.ids)))
+    all_sum_mouse.append((sum/len(dataset_test.ids)))
 
 
 
@@ -101,16 +105,16 @@ for i, model in enumerate(models):
         if j == 2:
             rat_residuuen.append(np.abs(a-c))
 
-        sum += ((np.sum(np.abs(a-c)))/np.prod(np.shape(a)))
-    print(1 - (sum/len(dataset_test.ids)))
-    all_sum_rat.append(1 - (sum/len(dataset_test.ids)))
+        sum += dice_score(gt=c, mask=a)  #((np.sum(np.abs(a-c)))/np.prod(np.shape(a)))
+    print((sum/len(dataset_test.ids)))
+    all_sum_rat.append((sum/len(dataset_test.ids)))
 
 plt.close()
 plt.plot([0, .5, 1.5, 2.5, 3.5, 4.5,  5.3, 5.9], np.array(all_sum_mouse), label="mouse accuracy")
 plt.plot([0, .5, 1.5, 2.5, 3.5, 4.5,  5.3, 5.9], np.array(all_sum_rat), label="rat accuracy")
 #plt.xticks(range(len(amount)), amount)
 plt.xticks([0, .5, 1.5, 2.5, 3.5, 4.5, 5.3, 5.9], amount)
-plt.ylabel("mask-pixel accuracy")
+plt.ylabel("averaged dice-score")
 plt.xlabel("quantity of animals")
 plt.legend()
 

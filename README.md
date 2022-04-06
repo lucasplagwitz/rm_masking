@@ -28,15 +28,17 @@ In addition, we tested how many mice are needed for the segmentation process.
 It is also interesting to observe how well the algorithm can be transferred to the rat. 
 In one case only mice are used for learning, in the other case some rats are additionally involved for learning.
 
-<img src="./demo/pixel_accuracy.png"/>
-
+<p align="center">
+    <img src="./demo/pixel_accuracy.png"/>
+</p>
 It turns out that in the environment we have chosen, 
 a number of 30 mice is sufficient. Beyond that, 
 we cannot see any improvements. However, it is clear 
 to see that training with rat data improves this prediction significantly.
 
-<img src="./demo/missclassification.png"/>
-
+<p align="center">
+    <img src="./demo/missclassification.png"/>
+</p>
 
 ### References
 [1] [O. Ronneberger, P. Fischer, T. Brox: U-Net: Convolutional Networks for Biomedical Image Segmentation. 
